@@ -10,12 +10,15 @@
   "author": "Arthur Lavrischev <ar2r13lawrence@gmail.com>",
   "scripts": {
     "start": "babel src -w -d dist",
-    "build": "babel src -d dist --copy-files"
+    "build": "babel src -d dist --copy-files",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm version patch"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.1",
     "@babel/core": "^7.10.2",
     "@babel/plugin-proposal-class-properties": "^7.10.1",
+    "@babel/plugin-proposal-optional-chaining": "^7.10.1",
     "@babel/plugin-proposal-private-methods": "^7.10.1",
     "@babel/preset-modules": "^0.1.3"
   },
