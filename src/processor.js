@@ -26,7 +26,6 @@ export function exec (expression, context) {
   try {
     return new Function('ctx', `with (ctx) {return ${expression}}`)(context)
   } catch (error) { 
-    console.warn(error)
     return '' 
   }
 }

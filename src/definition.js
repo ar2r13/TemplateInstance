@@ -40,17 +40,18 @@ export default class TemplateDefinition {
 
                         continue
                     }
-                    
+
                     const { length } = node.attributes
-                    for (let i = 0; i < length; ++i){
-                        const { name, value } = node.attributes[0]
+                    for (let i = 0; i < length; i++) {
+                        const { name, value } = node.attributes[i]
                         const [strings, values] = parser(value)
 
                         if (strings.length === 1) continue
                         
                         rules.push(new AttributeTemplateRule(nodeIndex, name, strings, values))
-                        node.removeAttribute(name)
+                        setTimeout(() => node.removeAttribute(name))
                     }
+
                     break
                 
                 case Node.TEXT_NODE :
