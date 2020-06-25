@@ -1,11 +1,13 @@
-# TemplateInstance polyfill
+# TemplateInstance
 
 [Template Instantiation](https://github.com/w3c/webcomponents/blob/gh-pages/proposals/Template-Instantiation.md) polyfill
 
 ## Installation
 
 ```sh
-$ yarn add @custom/template-instance
+$ yarn add template-instance
+# or
+$ npm install template-instance
 ```
 
 ## Usage
