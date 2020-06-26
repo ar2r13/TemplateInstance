@@ -18,18 +18,20 @@ export default class TemplateInstance extends DocumentFragment {
 
         this.#processor = processor
 
-        this.append(definition.content)
+        this.append(document.importNode(definition.content, true))
         this.#generateParts(definition)
         this.update(state)
     }
 
     update (state) {
+        const { createdCallback, processCallback } = this.#processor
+
         if (!this.#createdCallbackInvoked) {
-            this.#processor.createdCallback(this.#parts, state)
+            createdCallback instanceof Function && createdCallback(this.#parts, state)
             this.#createdCallbackInvoked = true
         }
 
-        this.#processor.processCallback(this.#parts, state)
+        processCallback instanceof Function && processCallback(this.#parts, state)
         this.#previousState = state
     }
 
