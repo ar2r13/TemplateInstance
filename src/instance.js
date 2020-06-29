@@ -27,11 +27,11 @@ export default class TemplateInstance extends DocumentFragment {
         const { createdCallback, processCallback } = this.#processor
 
         if (!this.#createdCallbackInvoked) {
-            createdCallback instanceof Function && createdCallback(this.#parts, state)
+            createdCallback instanceof Function && createdCallback(this, this.#parts, state)
             this.#createdCallbackInvoked = true
         }
 
-        processCallback instanceof Function && processCallback(this.#parts, state)
+        processCallback instanceof Function && processCallback(this, this.#parts, state)
         this.#previousState = state
     }
 
@@ -58,13 +58,13 @@ export default class TemplateInstance extends DocumentFragment {
 
     #createPart (rule, node) {
         if (rule instanceof AttributeTemplateRule) 
-            return new AttributeTemplatePart(this, rule, node)
+            return new AttributeTemplatePart(rule, node)
         else 
         if (rule instanceof InnerTemplateRule) 
-            return new InnerTemplatePart(this, rule, node)
+            return new InnerTemplatePart(rule, node)
         else 
         if (rule instanceof NodeTemplateRule) 
-            return new NodeTemplatePart(this, rule, node)
+            return new NodeTemplatePart(rule, node)
 
         throw new Error('Unknown rule type.')
     }

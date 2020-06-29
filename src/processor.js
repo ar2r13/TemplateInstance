@@ -2,22 +2,23 @@ import { NodeTemplatePart, AttributeTemplatePart, InnerTemplatePart } from './pa
 
 export default class TemplateProcessor {
 
-  createdCallback (parts, state) {}
+  createdCallback (instance, parts, state) {}
 
-  processCallback (parts, state) {
-    for (const part of parts)
-      switch (part.constructor.name) {
-        case 'InnerTemplatePart' :
-          break
+  processCallback (instance, parts, state) {
+
+    for (const part of parts) switch (part.constructor) {
+      case InnerTemplatePart :
+        break
         
-        case 'NodeTemplatePart' :
-          part.value = exec(part.rule.expression, state)
-          break
+      case NodeTemplatePart :
+        part.value = exec(part.expression, state)
+        break
 
-        case 'AttributeTemplatePart' :
-          part.value = part.rule.expressions?.map(expression => exec(expression, state))
-          break
-      }
+      case AttributeTemplatePart :
+        part.value = part.expressions?.map(expression => exec(expression, state))
+        break
+    }
+    
   }
 
 }
@@ -25,7 +26,5 @@ export default class TemplateProcessor {
 export function exec (expression, context) { 
   try {
     return new Function('ctx', `with (ctx) {return ${expression}}`)(context)
-  } catch (error) { 
-    return '' 
-  }
+  } catch (error) {}
 }

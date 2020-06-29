@@ -12,9 +12,9 @@ export class NodeTemplateRule extends TemplateRule {
 }
 
 export class AttributeTemplateRule extends TemplateRule {
-  constructor (nodeIndex, attributeName, strings, expressions) {
+  constructor (nodeIndex, attirbute, strings, expressions) {
     super(nodeIndex)
-    Object.assign(this, { attributeName, strings, expressions })
+    Object.assign(this, { attirbute, strings, expressions })
   }
 }
 
@@ -26,5 +26,6 @@ export class InnerTemplateRule extends NodeTemplateRule {
     super(nodeIndex, template.getAttribute('expression') || '')
 
     this.template = template
+    this.directive = template.getAttribute('directive') || ''
   }
 }

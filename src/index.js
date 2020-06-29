@@ -6,6 +6,7 @@ const templateDefinitionCache = new Map()
 const templateTypesCache = new Map()
 
 function createInstance (state, overrideCache = false) {
+    if (!state) throw new TypeError(`Failed to execute 'createInstance' on ${this.constructor.name}: state is not provided.`)
     if (overrideCache || !templateDefinitionCache.has(this)) 
         templateDefinitionCache.set(this, new TemplateDefinition(this))
 

@@ -9,7 +9,7 @@ export default class TemplateDefinition {
 
     #parsedTemplate = document.createElement('template')
 
-    constructor (template) {
+    constructor (template = new HTMLTemplateElement) {
         this.template = template
         this.#parse()
     }
@@ -20,6 +20,8 @@ export default class TemplateDefinition {
 
     #parse () {
         const content = this.template.content.cloneNode(true)
+        content.normalize()
+
         const rules = []
         const walker = createTreeWalker(content)
 
@@ -31,7 +33,6 @@ export default class TemplateDefinition {
 
             switch (node.nodeType) {
                 case Node.ELEMENT_NODE :
-                    if (!node.hasAttributes()) continue
                     if (node instanceof HTMLTemplateElement) {
                         const partNode = document.createTextNode('')
     
@@ -43,12 +44,12 @@ export default class TemplateDefinition {
 
                     const { length } = node.attributes
                     for (let i = 0; i < length; i++) {
-                        const { name, value } = node.attributes[i]
-                        const [strings, values] = parser(value)
+                        const attribute = node.attributes[i]
+                        const [strings, values] = parser(attribute.value)
 
                         if (strings.length === 1) continue
                         
-                        rules.push(new AttributeTemplateRule(nodeIndex, name, strings, values))
+                        rules.push(new AttributeTemplateRule(nodeIndex, attribute, strings, values))
                         setTimeout(() => node.removeAttribute(name))
                     }
 
