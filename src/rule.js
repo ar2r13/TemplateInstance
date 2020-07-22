@@ -12,9 +12,9 @@ export class NodeTemplateRule extends TemplateRule {
 }
 
 export class AttributeTemplateRule extends TemplateRule {
-  constructor (nodeIndex, attirbute, strings, expressions) {
+  constructor (nodeIndex, attribute, strings, expression) {
     super(nodeIndex)
-    Object.assign(this, { attirbute, strings, expressions })
+    Object.assign(this, { attribute, strings, expression })
   }
 }
 

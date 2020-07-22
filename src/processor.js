@@ -15,7 +15,7 @@ export default class TemplateProcessor {
         break
 
       case AttributeTemplatePart :
-        part.value = part.expressions?.map(expression => exec(expression, state))
+        part.value = part.expression?.map(expression => exec(expression, state))
         break
     }
     
@@ -26,5 +26,7 @@ export default class TemplateProcessor {
 export function exec (expression, context) { 
   try {
     return new Function('ctx', `with (ctx) {return ${expression}}`)(context)
-  } catch (error) {}
+  } catch (error) { 
+    // console.error(error) 
+  }
 }

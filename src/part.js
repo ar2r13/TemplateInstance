@@ -18,6 +18,8 @@ export class TemplatePart {
 
 export class AttributeTemplatePart extends TemplatePart {
 
+  #strings = []
+
   set value (value) { 
     if (value === super.value) return
     
@@ -27,7 +29,8 @@ export class AttributeTemplatePart extends TemplatePart {
 
   constructor (rule, element) {
     super(rule)
-    
+    this.#strings = rule.strings
+
     Object.defineProperties(this, {
       element: {
         get () { return element }
@@ -36,9 +39,7 @@ export class AttributeTemplatePart extends TemplatePart {
         get () { return rule.attribute.name }
       },
       attributeNamespace: {
-        get () {
-          return rule.attribute.namespaceURI
-        }
+        get () { return rule.attribute.namespaceURI }
       }
     })
   }
@@ -47,11 +48,10 @@ export class AttributeTemplatePart extends TemplatePart {
     if (!value) value = []
     else if (!Array.isArray(value)) value = [value]
 
-    const { strings } = this.rule
-    const valueFragments = Array(strings.length * 2)
+    const valueFragments = Array(this.#strings.length * 2)
 
     for (let i = 0; i < valueFragments.length; i += 2) {
-      valueFragments[i] = strings[i / 2]
+      valueFragments[i] = this.#strings[i / 2]
       valueFragments[i + 1] = value[i / 2] || ''
     }
 
@@ -63,7 +63,6 @@ export class AttributeTemplatePart extends TemplatePart {
 }
 
 export class NodeTemplatePart extends TemplatePart {
-
   
   set value (value) { 
     if (value === super.value) return
@@ -137,7 +136,7 @@ export class NodeTemplatePart extends TemplatePart {
     
     else throw new TypeError('argument is not a Node.')
 
-    this.parentNode.insertBefore(node, this.nextSibling)
+    this.parentNode.insertBefore(node, this.previousSibling)
   }
 
 }

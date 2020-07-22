@@ -35,20 +35,20 @@ export default class TemplateDefinition {
                 case Node.ELEMENT_NODE :
                     if (node instanceof HTMLTemplateElement) {
                         const partNode = document.createTextNode('')
-    
-                        node.parentNode.replaceChild(partNode, node)
+
                         rules.push(new InnerTemplateRule(nodeIndex, node))
+                        setTimeout(() => node.replaceWith(partNode))
 
                         continue
                     }
 
                     const { length } = node.attributes
                     for (let i = 0; i < length; i++) {
-                        const attribute = node.attributes[i]
+                        const attribute = node.attributes[i].cloneNode(true)
                         const [strings, values] = parser(attribute.value)
 
                         if (strings.length === 1) continue
-                        
+
                         rules.push(new AttributeTemplateRule(nodeIndex, attribute, strings, values))
                         setTimeout(() => node.removeAttribute(name))
                     }
