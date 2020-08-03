@@ -34,11 +34,7 @@ export default class TemplateDefinition {
             switch (node.nodeType) {
                 case Node.ELEMENT_NODE :
                     if (node instanceof HTMLTemplateElement) {
-                        const partNode = document.createTextNode('')
-
                         rules.push(new InnerTemplateRule(nodeIndex, node))
-                        setTimeout(() => node.replaceWith(partNode))
-
                         continue
                     }
 
