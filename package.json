@@ -1,6 +1,6 @@
 {
   "name": "template-instance",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "TemplateInstance polyfill",
   "main": "dist/index.js",
   "exports": {
