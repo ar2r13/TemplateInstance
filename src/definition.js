@@ -59,7 +59,7 @@ export default class TemplateDefinition {
                         const partNode = node.ownerDocument.createTextNode(strings[i])
 
                         node.parentNode.insertBefore(partNode, node)
-                        rules.push(new NodeTemplateRule(nodeIndex++, values[i]))
+                        rules.push(new NodeTemplateRule(++nodeIndex, values[i]))
                     }
 
                     node.nodeValue = strings[strings.length - 1]
