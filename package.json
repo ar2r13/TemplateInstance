@@ -1,29 +1,30 @@
 {
   "name": "template-instance",
-  "version": "0.1.9",
   "description": "TemplateInstance polyfill",
+  "version": "0.2.0",
+  "author": "Arthur Lavrischev <ar2r13lawrence@gmail.com>",
+  "repository": "https://github.com/ar2r13/template-instance.git",
   "main": "dist/index.js",
+  "type": "module",
   "exports": {
     "./": "./dist/"
   },
-  "type": "module",
-  "author": "Arthur Lavrischev <ar2r13lawrence@gmail.com>",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ar2r13/template-instance.git"
-  },
   "scripts": {
-    "start": "babel src -w -d dist",
-    "build": "babel src -d dist --copy-files",
-    "prepare": "npm run build",
+    "start": "rollup -c -w rollup.config.js",
+    "test": "jest --verbose",
+    "build": "rollup -c rollup.config.js",
+    "prepare": "npm run build && npm run test",
     "prepublishOnly": "npm version patch"
   },
   "devDependencies": {
-    "@babel/cli": "^7.10.1",
-    "@babel/core": "^7.10.2",
-    "@babel/plugin-proposal-class-properties": "^7.10.1",
-    "@babel/plugin-proposal-optional-chaining": "^7.10.1",
-    "@babel/plugin-proposal-private-methods": "^7.10.1",
-    "@babel/preset-modules": "^0.1.3"
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-proposal-private-methods": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
+    "@rollup/plugin-babel": "^5.2.1",
+    "chance": "^1.1.7",
+    "jest": "^26.6.3",
+    "rollup": "^2.33.2",
+    "rollup-plugin-clear": "^2.0.7",
+    "rollup-plugin-terser": "^7.0.2"
   }
 }

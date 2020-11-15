@@ -1,7 +1,7 @@
 const openRegExp = /{{/g
 const closeRegExp = /}}/g
 
-export default function parser(templateString) {
+export default function parser (templateString) {
   
   const strings = []
   const expressions = []

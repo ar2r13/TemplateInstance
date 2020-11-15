@@ -1,9 +1,6 @@
 import parser from './parser.js'
+import { createTreeWalker } from './helpers.js'
 import { NodeTemplateRule, AttributeTemplateRule, InnerTemplateRule } from './rule.js'
-
-export function createTreeWalker(node) {
-    return document.createTreeWalker(node, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT, null, false)
-}
 
 export default class TemplateDefinition {
 

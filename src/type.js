@@ -1,6 +1,7 @@
 import { NodeTemplatePart, AttributeTemplatePart, InnerTemplatePart } from './part.js'
+import { exec } from './helpers.js'
 
-export default class TemplateProcessor {
+export default class TemplateTypeInit {
 
   createdCallback (instance, parts, state) {}
 
@@ -21,12 +22,4 @@ export default class TemplateProcessor {
     
   }
 
-}
-
-export function exec (expression, context) { 
-  try {
-    return new Function('ctx', `with (ctx) {return ${expression}}`)(context)
-  } catch (error) { 
-    // console.error(error) 
-  }
 }

@@ -45,14 +45,14 @@ export class AttributeTemplatePart extends TemplatePart {
   }
 
   #applyValue (value) {
-    if (!value) value = []
+    if (value === undefined) value = []
     else if (!Array.isArray(value)) value = [value]
 
     const valueFragments = Array(this.#strings.length * 2)
 
     for (let i = 0; i < valueFragments.length; i += 2) {
       valueFragments[i] = this.#strings[i / 2]
-      valueFragments[i + 1] = value[i / 2] || ''
+      valueFragments[i + 1] = value[i / 2] ?? ''
     }
 
     const attributeValue = valueFragments.join('')

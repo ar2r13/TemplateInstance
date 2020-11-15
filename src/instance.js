@@ -1,6 +1,5 @@
-import TemplateProcessor from './processor.js'
-import { createTreeWalker } from './definition.js'
-
+import TemplateType from './type.js'
+import { createTreeWalker, RequiredError } from './helpers.js'
 import { AttributeTemplatePart, NodeTemplatePart, InnerTemplatePart } from './part.js'
 import { AttributeTemplateRule, NodeTemplateRule, InnerTemplateRule } from './rule.js'
 
@@ -8,7 +7,7 @@ export default class TemplateInstance extends DocumentFragment {
     
     #parts = []
 
-    #processor = new TemplateProcessor
+    #processor = new TemplateType
 
     #createdCallbackInvoked = false
     #previousState = null
@@ -24,14 +23,16 @@ export default class TemplateInstance extends DocumentFragment {
     }
 
     update (state) {
+        if (!state) throw new RequiredError(this.update.name, this.constructor.name, 'state')
+        
         const { createdCallback, processCallback } = this.#processor
 
         if (!this.#createdCallbackInvoked) {
-            createdCallback instanceof Function && createdCallback(this, this.#parts, state)
+            typeof createdCallback === typeof Function && createdCallback(this, this.#parts, state)
             this.#createdCallbackInvoked = true
         }
 
-        processCallback instanceof Function && processCallback(this, this.#parts, state)
+        typeof processCallback === typeof Function && processCallback(this, this.#parts, state)
         this.#previousState = state
     }
 

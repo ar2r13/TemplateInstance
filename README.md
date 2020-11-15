@@ -5,8 +5,6 @@
 ## Installation
 
 ```sh
-$ yarn add template-instance
-# or
 $ npm install template-instance
 ```
 
@@ -25,7 +23,7 @@ _index.html_.
     const instance = template.createInstance({ name: 'Robins' })
     document.body.append(instance) 
 
-    instance.update({ name: 'Bobins' })
+    instance.update({ name: 'Bobins' }) 
 </script>
 ```
 
