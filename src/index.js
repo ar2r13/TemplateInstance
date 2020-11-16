@@ -40,5 +40,5 @@ function defineTemplateType (name, processor, overrideCache = false) {
         templateTypesCache.set(name, processor)
 }
 
-Object.defineProperty(HTMLTemplateElement.prototype, createInstance.name, { value: createInstance })
-Object.defineProperty(document, defineTemplateType.name, { value: defineTemplateType })
+Object.defineProperty(HTMLTemplateElement.prototype, 'createInstance', { value: createInstance })
+Object.defineProperty(document, 'defineTemplateType', { value: defineTemplateType })

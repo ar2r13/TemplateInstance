@@ -14,7 +14,7 @@
     "test": "jest --verbose",
     "build": "rollup -c rollup.config.js",
     "prepare": "npm run build && npm run test",
-    "prepublishOnly": "npm version patch"
+    "prepublishOnly": "npm prepare && npm version patch"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.12.1",
